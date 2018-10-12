@@ -36,3 +36,25 @@ sudo mount -t vboxsf share /home/dev-user/share
 
 ### example of what the above should look like:
 ``` <name_of_share> /path/to/mountpoint vboxsf default 0 0 ```
+
+
+----------------------------------------------------------------------------------------------------
+
+# How to test if port works on host if everything is firewalled
+### Open Windows powershell
+Test-NetConnection -Computername localhost -Port 9300
+
+###Compare against a port that you know is blocked.
+
+
+
+# Other ways to test if guest is firewalled, these are commands to run while in guest VM.
+### Verify status of FirewallD and Iptables and disable them as well.
+
+`systemctl status firewalld`
+`systemctl disable firewalld`
+`systemctl stop iptables`
+
+### Also check services name and port:
+
+`nmap -sT -o localhost`
